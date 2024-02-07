@@ -83,12 +83,16 @@ elif selected == "Data Visualization":
     st.header("Data Visualization")
     with st.form("saved_periods"):
         # get data from db
-        period = st.selectbox("Select Period", ["2022_March"])
+        period = st.selectbox("Select Period", get_all_periods())
         submit_button = st.form_submit_button("Plot")
         if submit_button:
-            comment = "Some comment"
-            incomes = {"Salary": 1000, "Other Income": 200}
-            expenses = {"Rent": 500, "Groceries": 200, "Utilities": 100, "Shopping": 300, "Insurance": 100, "Other Expenses": 100}
+            period_data = db.get_period(period)
+            comment = period_data.get("comment")
+            incomes = period_data.get("incomes")
+            expenses = period_data.get("expenses")
+            # comment = "Some comment"
+            # incomes = {"Salary": 1000, "Other Income": 200}
+            # expenses = {"Rent": 500, "Groceries": 200, "Utilities": 100, "Shopping": 300, "Insurance": 100, "Other Expenses": 100}
 
             # metrics
             total_income = sum(incomes.values())
