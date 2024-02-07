@@ -4,6 +4,7 @@ import plotly.express as px
 import calendar
 from datetime import datetime
 from streamlit_option_menu import option_menu
+import database as db
 
 
 
@@ -34,7 +35,10 @@ st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 years = [datetime.today().year, datetime.today().year + 1]
 months = list(calendar.month_name)[1:]
 
-
+def get_all_periods():
+    items = db.fetch_all_periods()
+    periods = [item["key"] for item in items]
+    return periods
 
 
 
@@ -66,9 +70,12 @@ if selected == "Data Entry":
             period = str(st.session_state.year) + " " + str(st.session_state.month)
             incomes = {income: st.session_state[income] for income in incomes}
             expenses = {expense: st.session_state[expense] for expense in expenses}
-            st.write(f"Period: {period}")
-            st.write("Incomes:", incomes)
-            st.write("Expenses:", expenses)
+            comment = st.session_state.comments
+
+            # st.write(f"Period: {period}")
+            # st.write("Incomes:", incomes)
+            # st.write("Expenses:", expenses)
+            db.insert_period(period, incomes, expenses, comment)
             st.success("Data submitted successfully!")
 
 elif selected == "Data Visualization":
