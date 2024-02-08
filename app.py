@@ -4,8 +4,7 @@ import plotly.express as px
 import calendar
 from datetime import datetime
 from streamlit_option_menu import option_menu
-import database as db
-
+import mongodb as db
 
 
 # two lists for the different incomes and expenses
@@ -41,7 +40,6 @@ def get_all_periods():
     return periods
 
 
-
 selected = option_menu(menu_title=None,
                        options=["Data Entry", "Data Visualization"],
                        icons=["pencil-fill", "bar-chart-fill"],
@@ -65,7 +63,8 @@ if selected == "Data Entry":
             st.text_area("", placeholder="Enter any comments here", key="comments")
 
         "---"
-        submit_button = st.form_submit_button("Submit")
+        col1, col2, col3 = st.columns([1, 1, 1])
+        submit_button = col2.form_submit_button("Submit", use_container_width=True)
         if submit_button:
             period = str(st.session_state.year) + " " + str(st.session_state.month)
             incomes = {income: st.session_state[income] for income in incomes}
@@ -84,7 +83,8 @@ elif selected == "Data Visualization":
     with st.form("saved_periods"):
         # get data from db
         period = st.selectbox("Select Period", get_all_periods())
-        submit_button = st.form_submit_button("Plot")
+        col1, col2, col3 = st.columns([1, 1, 1])
+        submit_button = col2.form_submit_button("Plot", use_container_width=True)
         if submit_button:
             period_data = db.get_period(period)
             comment = period_data.get("comment")

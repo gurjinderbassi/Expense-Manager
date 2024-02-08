@@ -1,7 +1,13 @@
-### Expense Manager App using StreamLit and NoSQL
+## Expense Manager App using StreamLit and NoSQL
 
-This is a simple app created using Streamlit that allows the user to:
-- Enter their income 
-- Enter their expenses
-- Store the data in database
-- Show visualizations for the selected date
+
+
+#### Features:
+- Use Streamlit to build the front-end components.
+- Use NoSQL MongoDB connection to handle the back-end.
+
+
+The app will allow the user to:
+- Input their income and expenses.
+- Store the entered information in the database.
+- Retrieve the income and expenses for the specified period and plot an interactive Sankey Diagram.
