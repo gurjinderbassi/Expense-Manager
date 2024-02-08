@@ -1,6 +1,6 @@
 ## Expense Manager App using StreamLit and NoSQL
 
-![alt text](images/screenshot 1.png)
+![Alt text](images/screenshot 1.png?raw=true "Screen 1")
 
 #### Features:
 - Use Streamlit to build the front-end components.
