@@ -1,9 +1,15 @@
 ## Expense Manager App using StreamLit and NoSQL
-![Alt text](image.png)
-
 #### Features:
 - Use Streamlit to build the front-end components.
 - Use NoSQL MongoDB connection to handle the back-end.
+
+
+View 1:
+![Alt text](image.png)
+
+View 2:
+![Alt text](image-1.png)
+
 
 
 The app will allow the user to:
