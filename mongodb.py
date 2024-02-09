@@ -21,7 +21,7 @@ def insert_period(period, incomes, expenses, comment):
     db = client["budget_app"]
     collection = db["periods"]
     data = {
-        "key": period,
+        "_id": period,
         "incomes": incomes,
         "expenses": expenses,
         "comment": comment
@@ -30,7 +30,7 @@ def insert_period(period, incomes, expenses, comment):
 
 # fetch all periods from MongoDB
 def fetch_all_periods():
-    db = client["budget_app"]
+    db = client["budget_app"] # database name is budget_app
     collection = db["periods"]
     return collection.find()
 
@@ -38,4 +38,4 @@ def fetch_all_periods():
 def get_period(period):
     db = client["budget_app"]
     collection = db["periods"]
-    return collection.find_one({"key": period})
+    return collection.find_one({"_id": period})

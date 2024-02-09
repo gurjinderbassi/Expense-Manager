@@ -36,7 +36,7 @@ months = list(calendar.month_name)[1:]
 
 def get_all_periods():
     items = db.fetch_all_periods()
-    periods = [item["key"] for item in items]
+    periods = [item["_id"] for item in items]
     return periods
 
 
@@ -46,7 +46,6 @@ selected = option_menu(menu_title=None,
                        orientation="horizontal") # more icons: https://icons.getbootstrap.com/
 
 if selected == "Data Entry":
-
     with st.form("entry_form", clear_on_submit=True):
         col1, col2 = st.columns(2)
         col1.selectbox("Select Month", months, key="month")
@@ -74,8 +73,13 @@ if selected == "Data Entry":
             # st.write(f"Period: {period}")
             # st.write("Incomes:", incomes)
             # st.write("Expenses:", expenses)
-            db.insert_period(period, incomes, expenses, comment)
-            st.success("Data submitted successfully!")
+
+            # check if period already exists
+            if period in get_all_periods():
+                st.error("Record already exists!")
+            else:
+                db.insert_period(period, incomes, expenses, comment)
+                st.success("Data submitted successfully!")
 
 elif selected == "Data Visualization":
     # plot periods
